@@ -7,16 +7,16 @@ import { UserService } from './user.service';
 @Component({
   selector: 'hello',
   template: `
-    <h1>Hello</h1>
+    <h1 *ngIf="(username | async).username">Hello {{ (username | async).username }}</h1>
   `,
 })
 export class HelloComponent implements OnInit, OnDestroy {
-  // username: Observable<User>;
+  username: Observable<User>;
 
   constructor(private userService: UserService) {}
 
   ngOnInit(): void {
-    // this.username = this.userService.currentUserSubject;
+    this.username = this.userService.currentUserSubject;
   }
 
   ngOnDestroy(): void {}
