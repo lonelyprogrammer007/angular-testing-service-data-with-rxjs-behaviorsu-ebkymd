@@ -1,5 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { User } from './user.model';
 
 import { UserService } from './user.service';
@@ -10,7 +10,7 @@ import { UserService } from './user.service';
     <h1 *ngIf="(username | async).username">Hello {{ (username | async).username }}</h1>
   `,
 })
-export class HelloComponent implements OnInit, OnDestroy {
+export class HelloComponent implements OnInit {
   username: Observable<User>;
 
   constructor(private userService: UserService) {}
@@ -18,6 +18,4 @@ export class HelloComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.username = this.userService.currentUserSubject;
   }
-
-  ngOnDestroy(): void {}
 }
