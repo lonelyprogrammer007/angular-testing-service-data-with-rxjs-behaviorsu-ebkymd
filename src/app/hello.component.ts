@@ -1,30 +1,23 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
+import { User } from './user.model';
 
 import { UserService } from './user.service';
 
 @Component({
   selector: 'hello',
   template: `
-    <h1 *ngIf="username">Hello {{ username }}!</h1>
-  `
+    <h1>Hello</h1>
+  `,
 })
 export class HelloComponent implements OnInit, OnDestroy {
-  username: string;
-
-  private userServiceSubscription: Subscription | undefined;
+  // username: Observable<User>;
 
   constructor(private userService: UserService) {}
 
   ngOnInit(): void {
-    this.userServiceSubscription = this.userService.currentUser.subscribe(
-      currentUser => {
-        this.username = currentUser.username;
-      }
-    );
+    // this.username = this.userService.currentUserSubject;
   }
 
-  ngOnDestroy(): void {
-    this.userServiceSubscription?.unsubscribe();
-  }
+  ngOnDestroy(): void {}
 }
